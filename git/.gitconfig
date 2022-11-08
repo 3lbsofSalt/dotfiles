@@ -1,0 +1,7 @@
+[user]
+	email = max.ramsdell@protonmail.com
+	name = 3lbsofSalt
+[core]
+	editor = emacs
+[init]
+	defaultBranch = master

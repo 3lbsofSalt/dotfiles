@@ -1,0 +1,14 @@
+font:
+  normal:
+    family: scientifica
+    style: Regular
+
+window:
+  padding:
+    x: 5
+    y: 7
+  dynamic_padding: true
+
+
+key_bindings:
+  - { key: Return, mods: Control|Shift, action: SpawnNewInstance }

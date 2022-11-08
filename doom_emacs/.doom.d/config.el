@@ -1,0 +1,1 @@
+/home/madram/programs/shell/archSetup/doom.d/config.el
