@@ -204,6 +204,12 @@ bindsym $mod+r mode "resize"
 
 exec_always --no-startup-id $HOME/.config/polybar/polybar-start.sh
 
+exec_always xbacklight -set 75
+bindsym XF86MonBrightnessUp exec xbacklight -inc 5
+bindsym XF86MonBrightnessDown exec xbacklight -dec 5
+
+include ~/.config/i3/themeSpecificConfig
+
 bindsym Mod1+Shift+c exec "~/programs/shell/dmenu/dconfigure"
 bindsym Ctrl+$mod+space exec toggleColemak
 bindsym Mod1+Shift+s exec "scrot"
