@@ -1,0 +1,1 @@
+- [ ] When you highlight something in the command line, it automatically ends up on your clipboard

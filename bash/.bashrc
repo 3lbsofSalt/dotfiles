@@ -5,6 +5,9 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+### THIS IS A TEMPORARY FIX! I WANT TO FIND A WAY AROUND IT ###
+export NODE_OPTIONS=--openssl-legacy-provider
+
 export PATH=$PATH:$HOME/programs/shell/dmenu:$HOME/.global_node_modules/bin
 
 # For development of Badger's Workorder System
@@ -62,6 +65,8 @@ Backspace| Erase the character to the LEFT of the cursor
   ^U     | Cut the entire command line
 :
 }
+
+bind -s 'set completion-ignore-case on'
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
