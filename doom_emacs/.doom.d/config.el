@@ -112,7 +112,7 @@
 (add-hook 'web-mode-hook 'my-web-mode-hook)
 
 (set-frame-font "scientifica" nil t)
-(set-face-attribute 'default nil :height 100)
+(set-face-attribute 'default nil :height 140)
 
 (setq so-long-threshold 1000000)
 

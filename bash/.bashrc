@@ -5,24 +5,11 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-### THIS IS A TEMPORARY FIX! I WANT TO FIND A WAY AROUND IT ###
-export NODE_OPTIONS=--openssl-legacy-provider
-
-export PATH=$PATH:$HOME/programs/shell/dmenu:$HOME/.global_node_modules/bin
-
-# For development of Badger's Workorder System
-export COMPOSE_PROFILES="development"
-
-export FZF_DEFAULT_OPTS='--border'
-export FZF_DEFAULT_COMMAND="find . -type d \( -name node_modules -o -name .git -o -name .nuxt \) -prune -false -o -name '*'"
-
 alias ls='ls -a --color=auto'
 alias ll='ls -lah --color=auto'
 alias gs='git status'
 alias py='python'
 
-# Created by `pipx` on 2021-07-21 06:01:40
-export PATH="$PATH:/home/madram/.local/bin"
 
 git_branch="`git branch 2> /dev/null | grep -e ^* | sed -E  s/^\\\\\*\ \(.+\)$/\(\\\\\1\)\ /`"
 
@@ -67,8 +54,3 @@ Backspace| Erase the character to the LEFT of the cursor
 }
 
 bind -s 'set completion-ignore-case on'
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
