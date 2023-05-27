@@ -1,5 +1,3 @@
+require("3lbsofSalt.set")
 require("3lbsofSalt.remap")
-vim.cmd([[ set number]])
-vim.cmd([[ set tabstop=2 ]])
-vim.cmd([[ set shiftwidth=2 ]])
-vim.cmd([[ set expandtab ]])
+
