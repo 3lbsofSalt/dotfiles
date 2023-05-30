@@ -1,0 +1,1 @@
+-- If you every want to configure jsx pretty, here's the place to do it

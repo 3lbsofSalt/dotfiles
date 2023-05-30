@@ -154,6 +154,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/madram/.local/share/nvim/site/pack/packer/start/vim-fugitive",
     url = "https://github.com/tpope/vim-fugitive"
+  },
+  ["vim-jsx-pretty"] = {
+    loaded = true,
+    path = "/home/madram/.local/share/nvim/site/pack/packer/start/vim-jsx-pretty",
+    url = "https://github.com/MaxMEllon/vim-jsx-pretty"
   }
 }
 
