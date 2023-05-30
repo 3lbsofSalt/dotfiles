@@ -44,4 +44,9 @@ return require('packer').startup(function(use)
 
   }
   use('MaxMEllon/vim-jsx-pretty')
+  use('tpope/vim-surround')
+  use {
+	"windwp/nvim-autopairs",
+    config = function() require("nvim-autopairs").setup {} end
+  }
 end)

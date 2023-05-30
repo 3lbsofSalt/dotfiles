@@ -2,6 +2,6 @@
 	email = max.ramsdell@protonmail.com
 	name = 3lbsofSalt
 [core]
-	editor = emacs
+	editor = nvim
 [init]
 	defaultBranch = master
