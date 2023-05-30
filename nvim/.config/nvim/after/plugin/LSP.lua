@@ -1,11 +1,12 @@
-print("Loading LSP")
 local lsp = require('lsp-zero').preset({})
 
 lsp.ensure_installed({
   'vuels',
   'eslint',
   'rust_analyzer',
-  'clangd'
+  'clangd',
+  'tsserver',
+  'omnisharp'
 })
 
 local cmp = require('cmp')
@@ -35,7 +36,7 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set("n", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 end)
 
--- (Optional) Configure lua language server for neovim
 require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
+require('lspconfig').omnisharp.setup{}
 
 lsp.setup()

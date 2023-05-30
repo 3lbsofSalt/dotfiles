@@ -9,6 +9,7 @@ alias ls='ls -a --color=auto'
 alias ll='ls -lah --color=auto'
 alias gs='git status'
 alias py='python'
+alias vim='nvim'
 
 
 git_branch="`git branch 2> /dev/null | grep -e ^* | sed -E  s/^\\\\\*\ \(.+\)$/\(\\\\\1\)\ /`"
