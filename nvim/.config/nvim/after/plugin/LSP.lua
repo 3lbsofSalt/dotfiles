@@ -38,6 +38,7 @@ end)
 
 require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 require('lspconfig').omnisharp.setup{}
+-- If developing javascript remember to install typescript and typescript-language-server npm packages globally
 require('lspconfig').tsserver.setup{}
 
 lsp.setup()
