@@ -1,5 +1,10 @@
 vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
 
+vim.keymap.set("n", "k", "gk");
+vim.keymap.set("n", "gk", "k");
+vim.keymap.set("n", "j", "gj");
+vim.keymap.set("n", "gj", "j");
+
 vim.keymap.set("n", "<leader>wv", vim.cmd.vsplit)
 vim.keymap.set("n", "<leader>ws", vim.cmd.split)
 vim.keymap.set("n", "<leader>wh", function() vim.cmd([[ wincmd h ]]) end)
