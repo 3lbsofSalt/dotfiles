@@ -1,4 +1,3 @@
-#
 # ~/.bashrc
 #
 
@@ -10,6 +9,7 @@ alias ll='ls -lah --color=auto'
 alias gs='git status'
 alias py='python'
 alias vim='nvim'
+alias tmux='tmux -2'
 
 
 git_branch="`git branch 2> /dev/null | grep -e ^* | sed -E  s/^\\\\\*\ \(.+\)$/\(\\\\\1\)\ /`"

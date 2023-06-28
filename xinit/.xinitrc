@@ -61,4 +61,5 @@ echo "Starting i3"
 sh ~/.fehbg &
 spotifyd --no-daemon &
 setxkbmap us -variant colemak
+setxkbmap -option caps:escape
 exec i3
