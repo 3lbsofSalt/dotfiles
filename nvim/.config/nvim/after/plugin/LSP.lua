@@ -40,5 +40,8 @@ require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 require('lspconfig').omnisharp.setup{}
 -- If developing javascript remember to install typescript and typescript-language-server npm packages globally
 require('lspconfig').tsserver.setup{}
+-- If working in a complex c package with many compile flags, run `bear -- {compile command here}`
+-- This will generate a compile_commands.json so that the editor will corectly understand how to link up all of the files
+require('lspconfig').clangd.setup{}
 
 lsp.setup()
