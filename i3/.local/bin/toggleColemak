@@ -1,0 +1,6 @@
+if setxkbmap -query | grep -q "colemak"; then
+  setxkbmap us
+else 
+  setxkbmap us -variant colemak
+  setxkbmap -option caps:escape
+fi

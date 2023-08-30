@@ -6,7 +6,8 @@ lsp.ensure_installed({
   'rust_analyzer',
   'clangd',
   'tsserver',
-  'omnisharp'
+  'omnisharp',
+  'pylsp'
 })
 
 local cmp = require('cmp')
