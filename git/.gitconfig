@@ -3,5 +3,7 @@
 	name = 3lbsofSalt
 [core]
 	editor = nvim
+[diff]
+  tool = vimdiff
 [init]
 	defaultBranch = master
