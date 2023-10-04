@@ -1,3 +1,4 @@
+-- Source this file and then run :PackerSync
 vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
@@ -49,4 +50,8 @@ return require('packer').startup(function(use)
 	"windwp/nvim-autopairs",
     config = function() require("nvim-autopairs").setup {} end
   }
+
+  -- To be used in tandem with "neovim-remote" as per:
+  -- https://devpoga.org/blog/2022-07-23_neovim_godot/
+  use('habamax/vim-godot')
 end)

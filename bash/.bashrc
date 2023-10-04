@@ -10,6 +10,7 @@ alias gs='git status'
 alias py='python'
 alias vim='nvim'
 alias tmux='tmux -2'
+alias gdvim='nvim --listen /tmp/godotvim.pipe'
 
 
 git_branch="`git branch 2> /dev/null | grep -e ^* | sed -E  s/^\\\\\*\ \(.+\)$/\(\\\\\1\)\ /`"
@@ -55,3 +56,5 @@ Backspace| Erase the character to the LEFT of the cursor
 }
 
 bind -s 'set completion-ignore-case on'
+
+export JAVA_HOME="/usr/lib/jvm/java-21-openjdk/"
