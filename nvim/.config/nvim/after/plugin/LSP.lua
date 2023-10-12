@@ -48,5 +48,12 @@ require('lspconfig').clangd.setup{}
 
 require('lspconfig').haxe_language_server.setup{}
 require('lspconfig').gdscript.setup{}
+require'lspconfig'.ltex.setup{
+  settings = {
+    ltex = {
+      completionEnabled = true
+    }
+  }
+}
 
 lsp.setup()
