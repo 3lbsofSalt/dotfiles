@@ -1,36 +1,46 @@
--- Source this file and then run :PackerSync
-vim.cmd [[packadd packer.nvim]]
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
 
-return require('packer').startup(function(use)
-  -- Packer can manage itself
-  use 'wbthomason/packer.nvim'
-  use {
-	  'nvim-telescope/telescope.nvim', tag = '0.1.4',
-	  requires = { {'nvim-lua/plenary.nvim'} }
-  }
-  use({
+require("lazy").setup({
+
+  {
+    'nvim-telescope/telescope.nvim', 
+    tag = '0.1.4',
+    dependencies = { 'nvim-lua/plenary.nvim' }
+  },
+  {
+    'nvim-treesitter/nvim-treesitter', 
+    build = ':TSUpdate'
+  },
+  {
 	  "neanias/everforest-nvim",
-	  -- Optional; default configuration will be used if setup isn't called.
 	  config = function()
 		  require("everforest").setup()
 	  end,
-  })
-
-  use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate'})
-  use('nvim-treesitter/playground')
-  use('nvim-lua/plenary.nvim')
-  use('ThePrimeagen/harpoon')
-  use('mbbill/undotree')
-  use('tpope/vim-fugitive')
-  use {
+  },
+  'nvim-treesitter/playground',
+  'ThePrimeagen/harpoon',
+  'mbbill/undotree',
+  'tpope/vim-fugitive',
+  {
     'VonHeikemen/lsp-zero.nvim',
     branch = 'v2.x',
-    requires = {
+    dependencies = {
       -- LSP Support
       {'neovim/nvim-lspconfig'},             -- Required
       {                                      -- Optional
         'williamboman/mason.nvim',
-        run = function()
+        build = function()
           pcall(vim.cmd, 'MasonUpdate')
         end,
       },
@@ -41,16 +51,13 @@ return require('packer').startup(function(use)
       {'hrsh7th/cmp-nvim-lsp'}, -- Required
       {'L3MON4D3/LuaSnip'},     -- Required
     }
-
-  }
-  use('MaxMEllon/vim-jsx-pretty')
-  use('tpope/vim-surround')
-  use {
-	"windwp/nvim-autopairs",
+  },
+  'MaxMEllon/vim-jsx-pretty',
+  {
+    "windwp/nvim-autopairs",
     config = function() require("nvim-autopairs").setup {} end
-  }
-
+  },
   -- To be used in tandem with "neovim-remote" as per:
   -- https://devpoga.org/blog/2022-07-23_neovim_godot/
   use('habamax/vim-godot')
-end)
+})
