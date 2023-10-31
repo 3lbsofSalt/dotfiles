@@ -59,5 +59,5 @@ require("lazy").setup({
   },
   -- To be used in tandem with "neovim-remote" as per:
   -- https://devpoga.org/blog/2022-07-23_neovim_godot/
-  use('habamax/vim-godot')
+  'habamax/vim-godot'
 })
