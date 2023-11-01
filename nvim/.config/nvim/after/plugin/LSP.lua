@@ -56,4 +56,6 @@ require'lspconfig'.ltex.setup{
   }
 }
 
+require'lspconfig'.jdtls.setup{}
+
 lsp.setup()

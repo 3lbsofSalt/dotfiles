@@ -59,4 +59,4 @@ Backspace| Erase the character to the LEFT of the cursor
 
 bind -s 'set completion-ignore-case on'
 
-export JAVA_HOME="/usr/lib/jvm/java-21-openjdk/"
+export JAVA_HOME="/usr/lib/jvm/java-17-openjdk/"
