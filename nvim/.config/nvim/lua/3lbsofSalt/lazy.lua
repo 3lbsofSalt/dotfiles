@@ -9,18 +9,19 @@ if not vim.loop.fs_stat(lazypath) then
     lazypath,
   })
 end
+
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-
   {
-    'nvim-telescope/telescope.nvim', 
+    'nvim-telescope/telescope.nvim',
     tag = '0.1.4',
     dependencies = { 'nvim-lua/plenary.nvim' }
   },
   {
-    'nvim-treesitter/nvim-treesitter', 
-    build = ':TSUpdate'
+    'nvim-treesitter/nvim-treesitter',
+    build = ':TSUpdate',
+    lazy = false
   },
   {
 	  "neanias/everforest-nvim",
@@ -59,5 +60,16 @@ require("lazy").setup({
   },
   -- To be used in tandem with "neovim-remote" as per:
   -- https://devpoga.org/blog/2022-07-23_neovim_godot/
-  'habamax/vim-godot'
+  'habamax/vim-godot',
+  'tpope/vim-surround',
+  -- Great article on using luasnip: https://www.ejmastnak.com/tutorials/vim-latex/luasnip/
+  -- Remember it must be used in conjunction with lsp-zero
+  {
+    "L3MON4D3/LuaSnip",
+    version = "v2.*",
+    build = "make install_jsregexp"
+  },
+  'saadparwaiz1/cmp_luasnip',
+  'lervag/vimtex',
+  'epwalsh/obsidian.nvim'
 })

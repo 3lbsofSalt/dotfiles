@@ -2,7 +2,6 @@ require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the five listed parsers should always be installed)
   ensure_installed = {
     "javascript",
-    "rust",
     "c",
     "lua",
     "vim",
@@ -30,12 +29,3 @@ require'nvim-treesitter.configs'.setup {
     enable = true,
   }
 }
-
-vim.filetype.add({
-  extension = {
-    script = 'lua',
-    gui_script = 'lua',
-    render_script = 'lua'
-  }
-})
-
