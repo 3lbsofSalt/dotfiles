@@ -6,15 +6,33 @@ return {
   ls.snippet(
     {
       trig="fc",
-      dscr="React functional component snippet"
-    -- equivalent to "${1:cond} ? ${2:then} : ${3:else}"
+      dscr="React functional component snippet",
+      priority="1100"
     },
     {
-      t({"import React, { useEffect, useState } from 'react';", "export default function "}),
+      t({"import React, { useEffect, useState } from 'react';", "", "export default function "}),
       i(1, "componentName"),
-      t({"() {", "return ("}),
+      t({"() {", "\treturn ("}),
       i(2, "body"),
-      t({")","}"})
+      t({");","}"})
+    }
+  ),
+
+
+  ls.snippet(
+    {
+      trig="router",
+      dsrc="Express router endpoint",
+      priority="1100"
+    },
+    {
+      t("router."),
+      i(1, "http-method"),
+      t("('/"),
+      i(2, "routename"),
+      t({"', async (req, res) => {"}),
+      i(3, "body"),
+      t({"", "\treturn res.sendStatus(200);", "});"})
     }
   )
 }
