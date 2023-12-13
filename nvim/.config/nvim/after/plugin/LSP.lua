@@ -2,7 +2,6 @@ local lsp = require('lsp-zero').preset({})
 local cmp_action = require('lsp-zero').cmp_action()
 
 lsp.ensure_installed({
-  'vuels',
   'eslint',
   'clangd',
   'tsserver',
@@ -69,6 +68,54 @@ require'lspconfig'.ltex.setup{
   }
 }
 
+--Enable (broadcasting) snippet capability for completion
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+require'lspconfig'.cssls.setup {
+  capabilities = capabilities,
+}
+
 require'lspconfig'.jdtls.setup{}
 
+require'lspconfig'.volar.setup{
+  filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json'},
+  init_options = {
+    typescript = {
+      -- tsdk = '/path/to/.npm/lib/node_modules/typescript/lib'
+      tsdk = os.getenv('HOME') .. '/.global_node_modules/lib/node_modules/typescript/lib'
+      -- Alternative location if installed as root:
+      -- tsdk = '/usr/local/lib/node_modules/typescript/lib'
+    }
+  }
+}
+
 lsp.setup()
+
+local tsserver_attached = false;
+local volar_attached = false;
+
+-- Prevents tsserver from being attached if volar is attached
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id);
+    if(client.name == 'volar') then
+      volar_attached = true;
+      if(tsserver_attached == true) then
+        for _, client in ipairs(vim.lsp.get_active_clients()) do
+          if client.name == 'tsserver' then
+            tsserver_attached = false;
+            client.stop();
+          end
+        end
+      end
+    end
+    if(client.name == 'tsserver') then
+      if(volar_attached == true) then
+        client.stop();
+      else
+        tsserver_attached = true;
+      end
+    end
+  end
+});

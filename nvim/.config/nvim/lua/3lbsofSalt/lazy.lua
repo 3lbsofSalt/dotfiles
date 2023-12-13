@@ -13,6 +13,9 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+  install = {
+    missing = false
+  },
   {
     'nvim-telescope/telescope.nvim',
     tag = '0.1.4',
@@ -20,8 +23,7 @@ require("lazy").setup({
   },
   {
     'nvim-treesitter/nvim-treesitter',
-    build = ':TSUpdate',
-    lazy = false
+    lazy = true
   },
   {
 	  "neanias/everforest-nvim",
