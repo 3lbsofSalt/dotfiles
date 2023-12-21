@@ -1,2 +1,2 @@
 #!/bin/sh
-feh --no-fehbg --bg-fill '/home/madram/Pictures/Wallpapers/FreshAir_Theme/CliffVillage.jpg'
+feh --no-fehbg --bg-fill "$HOME/Pictures/Wallpapers/FreshAir_Theme/CliffVillage.jpg"

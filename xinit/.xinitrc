@@ -9,15 +9,7 @@ sysmodmap=/etc/X11/xinit/.Xmodmap
 echo "Start"
 
 if [ -f $sysresources ]; then
-
-
-
-
-
-
-
     xrdb -merge $sysresources
-
 fi
 
 echo "Moving"
@@ -29,15 +21,7 @@ fi
 echo "Moving2"
 
 if [ -f "$userresources" ]; then
-
-
-
-
-
-
-
     xrdb -merge "$userresources"
-
 fi
 
 echo "Moving3"
@@ -56,10 +40,11 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
-echo "Starting i3"
+# Run a specific .xinitrc
+sh [[ -f ~/.profile ]] && . ~/.xinitrc.me
 
+echo "Starting i3"
 sh ~/.fehbg &
-spotifyd --no-daemon &
 setxkbmap us -variant colemak
 setxkbmap -option caps:escape
 exec i3

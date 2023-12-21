@@ -204,6 +204,7 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 exec_always --no-startup-id $HOME/.config/polybar/polybar-start.sh
+exec_always --no-startup-id $HOME/.fehbg
 
 exec_always xbacklight -set 75
 bindsym XF86MonBrightnessUp exec xbacklight -inc 5

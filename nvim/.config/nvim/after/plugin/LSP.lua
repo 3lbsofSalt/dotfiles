@@ -5,7 +5,6 @@ lsp.ensure_installed({
   'eslint',
   'clangd',
   'tsserver',
-  'pylsp',
   'ltex'
 })
 
