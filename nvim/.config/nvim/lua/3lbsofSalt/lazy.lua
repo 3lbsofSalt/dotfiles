@@ -10,6 +10,10 @@ if not vim.loop.fs_stat(lazypath) then
   })
 end
 
+-- For molten support
+package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks51/share/lua/5.1/?/init.lua;"
+package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks51/share/lua/5.1/?.lua;"
+
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
@@ -23,7 +27,6 @@ require("lazy").setup({
   },
   {
     'nvim-treesitter/nvim-treesitter',
-    lazy = true
   },
   {
 	  "neanias/everforest-nvim",
@@ -77,5 +80,28 @@ require("lazy").setup({
   },
   'saadparwaiz1/cmp_luasnip',
   'lervag/vimtex',
-  'epwalsh/obsidian.nvim'
+  'epwalsh/obsidian.nvim',
+  --[[ For Molten Support ]]
+  {
+    'benlubas/molten-nvim',
+    version = "^1.0.0",
+    build = ":UpdateRemotePlugins",
+    init = function()
+      vim.g.molten_output_win_max_height = 12
+    end,
+    dependencies = { '3rd/image.nvim' }
+  },
+  {
+    -- see the image.nvim readme for more information about configuring this plugin
+    "3rd/image.nvim",
+    opts = {
+      backend = "ueberzug", -- whatever backend you would like to use
+      max_width = 100,
+      max_height = 12,
+      max_height_window_percentage = math.huge,
+      max_width_window_percentage = math.huge,
+      window_overlap_clear_enabled = true, -- toggles images when windows are overlapped
+      window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
+    },
+  }
 })
