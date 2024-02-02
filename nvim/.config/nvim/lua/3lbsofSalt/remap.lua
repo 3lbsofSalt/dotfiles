@@ -1,4 +1,4 @@
-vim.keymap.set("n", "<leader>e", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>e", ":Oil<CR>")
 
 vim.keymap.set("n", "k", "gk");
 vim.keymap.set("n", "gk", "k");
