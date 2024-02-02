@@ -43,6 +43,7 @@ fi
 # Run a specific .xinitrc
 sh [[ -f ~/.profile ]] && . ~/.xinitrc.me
 
+sh DISPLAY=":0" picom -b
 echo "Starting i3"
 sh ~/.fehbg &
 setxkbmap us -variant colemak

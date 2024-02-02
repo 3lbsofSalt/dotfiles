@@ -15,3 +15,9 @@ vim.g.molten_virt_text_output = true
 
 -- this will make it so the output shows up below the \`\`\` cell delimiter
 vim.g.molten_virt_lines_off_by_1 = true
+
+vim.keymap.set("n", "<leader>mi", vim.cmd.MoltenInit)
+vim.keymap.set("n", "<leader>me", vim.cmd.MoltenEvaluateLine)
+vim.keymap.set("n", "<leader>mv", vim.cmd.MoltenEvaluateVisual)
+vim.keymap.set("n", "<leader>mc", vim.cmd.MoltenReevaluateCell)
+vim.keymap.set("n", "<leader>ma", vim.cmd.MoltenReevaluateAll)
