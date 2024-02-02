@@ -124,7 +124,7 @@ require'lspconfig'.pylsp.setup{
     pylsp = {
       plugins = {
         pycodestyle = {
-          ignore = {'E501'}, -- Rules at https://pycodestyle.pycqa.org/en/latest/intro.html#configuration
+          ignore = {'E501', 'E231', 'E302', 'W293', 'E275', 'E303', 'W291'}, -- Rules at https://pycodestyle.pycqa.org/en/latest/intro.html#configuration
           maxLineLength = 100
         }
       }
