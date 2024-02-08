@@ -108,10 +108,11 @@ require("lazy").setup({
       window_overlap_clear_enabled = true, -- toggles images when windows are overlapped
       window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
     },
+    lazy = true
   },
   {
     "GCBallesteros/jupytext.nvim",
-    config = true
+    config = true,
     lazy = true
   }
 })
