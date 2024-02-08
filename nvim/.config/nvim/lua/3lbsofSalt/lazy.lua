@@ -93,7 +93,8 @@ require("lazy").setup({
     init = function()
       vim.g.molten_output_win_max_height = 12
     end,
-    dependencies = { '3rd/image.nvim' }
+    dependencies = { '3rd/image.nvim' },
+    lazy = true
   },
   {
     -- see the image.nvim readme for more information about configuring this plugin
@@ -111,5 +112,6 @@ require("lazy").setup({
   {
     "GCBallesteros/jupytext.nvim",
     config = true
+    lazy = true
   }
 })
