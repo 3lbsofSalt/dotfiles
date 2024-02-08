@@ -16,8 +16,8 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
   ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
   ['<C-CR>'] = cmp.mapping.confirm({ select = true }),
   ['<C-Space>'] = cmp.mapping.complete(),
-  ['<Tab>'] = cmp_action.luasnip_supertab(),
-  ['<S-Tab>'] = cmp_action.luasnip_shift_supertab()
+  ['<Tab>'] = cmp_action.luasnip_jump_forward(),
+  ['<S-Tab>'] = cmp_action.luasnip_jump_backward()
 });
 
 lsp.setup_nvim_cmp({
@@ -51,21 +51,21 @@ end)
 
   -- To be used in tandem with "neovim-remote" as per:
   -- https://devpoga.org/blog/2022-07-23_neovim_godot/
-require('lspconfig').lua_ls.setup{}
+require('lspconfig').lua_ls.setup{};
 -- If developing javascript remember to install typescript and typescript-language-server npm packages globally
-require('lspconfig').tsserver.setup{}
+require('lspconfig').tsserver.setup{};
 -- If working in a complex c package with many compile flags, run `bear -- {compile command here}`
 -- This will generate a compile_commands.json so that the editor will corectly understand how to link up all of the files
-require('lspconfig').clangd.setup{}
+require('lspconfig').clangd.setup{};
 
-require('lspconfig').gdscript.setup{}
+require('lspconfig').gdscript.setup{};
 require'lspconfig'.ltex.setup{
   settings = {
     ltex = {
       completionEnabled = true
     }
   }
-}
+};
 
 --Enable (broadcasting) snippet capability for completion
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -76,6 +76,8 @@ require'lspconfig'.cssls.setup {
 }
 
 require'lspconfig'.jdtls.setup{}
+require('lspconfig').html.setup{};
+require('lspconfig').cssls.setup{};
 
 require'lspconfig'.volar.setup{
   filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json'},
