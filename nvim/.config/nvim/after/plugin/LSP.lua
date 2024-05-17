@@ -76,9 +76,10 @@ require'lspconfig'.cssls.setup {
 }
 
 require'lspconfig'.jdtls.setup{}
-require('lspconfig').html.setup{};
+-- require('lspconfig').html.setup{};
 require('lspconfig').cssls.setup{};
 
+--[[
 require'lspconfig'.volar.setup{
   filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json'},
   init_options = {
@@ -90,13 +91,16 @@ require'lspconfig'.volar.setup{
     }
   }
 }
+--]]
 
 lsp.setup()
 
 local tsserver_attached = false;
 local volar_attached = false;
 
+
 -- Prevents tsserver from being attached if volar is attached
+--[[
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
     local client = vim.lsp.get_client_by_id(args.data.client_id);
@@ -120,13 +124,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
   end
 });
+]]
 
 require'lspconfig'.pylsp.setup{
   settings = {
     pylsp = {
       plugins = {
         pycodestyle = {
-          ignore = {'E501', 'E231', 'E302', 'W293', 'E275', 'E303', 'W291'}, -- Rules at https://pycodestyle.pycqa.org/en/latest/intro.html#configuration
+          ignore = {'E501', 'E231', 'E302', 'W293', 'E275', 'E303', 'W291', 'E261', 'E305'}, -- Rules at https://pycodestyle.pycqa.org/en/latest/intro.html#configuration
           maxLineLength = 100
         }
       }

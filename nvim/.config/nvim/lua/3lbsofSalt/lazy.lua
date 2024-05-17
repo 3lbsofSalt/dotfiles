@@ -29,9 +29,7 @@ require("lazy").setup({
     tag = '0.1.4',
     dependencies = { 'nvim-lua/plenary.nvim' }
   },
-  {
-    'nvim-treesitter/nvim-treesitter',
-  },
+  { 'nvim-treesitter/nvim-treesitter', },
   {
 	  "neanias/everforest-nvim",
 	  config = function()
@@ -85,7 +83,7 @@ require("lazy").setup({
   'saadparwaiz1/cmp_luasnip',
   'lervag/vimtex',
   'epwalsh/obsidian.nvim',
-  --[[ For Molten Support ]]
+  -- For Molten Support
   {
     'benlubas/molten-nvim',
     version = "^1.0.0",

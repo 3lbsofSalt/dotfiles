@@ -25,7 +25,7 @@ foreground = ${colors.foreground}
 ;border-color = #00000000
 
 [global/wm]
-margin-top = 10
+margin-top = 10 
 
 include-file = ~/.config/polybar/xwindow.ini
 include-file = ~/.config/polybar/pulseaudio.ini

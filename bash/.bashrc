@@ -9,8 +9,9 @@ alias ll='ls -lah --color=auto'
 alias gs='git status'
 alias py='python'
 alias vim='nvim'
+alias v='nvim'
 alias tmux='tmux -2'
-alias gdvim='nvim --listen /tmp/godotvim.pipe'
+alias gdv='nvim --listen ./godothost'
 
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
@@ -61,3 +62,7 @@ bind -s 'set completion-ignore-case on'
 
 export JAVA_HOME="/usr/lib/jvm/java-17-openjdk/"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
