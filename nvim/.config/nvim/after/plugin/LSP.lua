@@ -76,7 +76,6 @@ require'lspconfig'.cssls.setup {
 require'lspconfig'.jdtls.setup{}
 require('lspconfig').html.setup{};
 require('lspconfig').cssls.setup{};
-require('lspconfig').rust.setup{};
 
 require'lspconfig'.pylsp.setup{
   settings = {

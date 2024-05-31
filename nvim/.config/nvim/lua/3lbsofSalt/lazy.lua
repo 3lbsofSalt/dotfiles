@@ -14,6 +14,9 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   {
+    "lambdalisue/vim-suda"
+  },
+  {
     'stevearc/oil.nvim',
     opts = {},
   },

@@ -1,3 +1,6 @@
+[env]
+term = "xterm-256color"
+
 [font.normal]
 family = "scientifica"
 style = "Regular"
