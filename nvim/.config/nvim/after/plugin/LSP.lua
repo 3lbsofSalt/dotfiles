@@ -35,7 +35,7 @@ cmp.setup({
   mapping = cmp_mappings,
 });
 
-lsp.on_attach(function(client, bufnr)
+lsp.on_attach(function(_, bufnr)
   local opts = {buffer = bufnr, remap = false}
   vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
   vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
@@ -49,7 +49,19 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set("n", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 end)
 
-require('lspconfig').lua_ls.setup{};
+require('lspconfig').lua_ls.setup{
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = {
+          "vim",
+          "require"
+        }
+      }
+    }
+  }
+
+};
 -- If developing javascript remember to install typescript and typescript-language-server npm packages globally
 require('lspconfig').tsserver.setup{};
 -- If working in a complex c package with many compile flags, run `bear -- {compile command here}`

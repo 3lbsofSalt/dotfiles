@@ -4,6 +4,7 @@ export PATH=$PATH:$HOME/programs/shell/dmenu:$HOME/.global_node_modules/bin:
 # keep in the repository
 export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$HOME/.luarocks51/bin"
+export PATH="$PATH:$HOME/.cargo/bin"
 export EDITOR='/usr/bin/nvim'
 
 # When machine specific environment variables are needed place then in `~/.bash_env`
