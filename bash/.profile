@@ -11,3 +11,4 @@ export EDITOR='/usr/bin/nvim'
 # Do not commit them to this repository
 [[ -f ~/.bash_env ]] && . ~/.bash_env
 
+. "$HOME/.cargo/env"
