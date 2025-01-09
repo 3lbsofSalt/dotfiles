@@ -62,8 +62,6 @@ require('lspconfig').lua_ls.setup{
     }
 
 };
--- If developing javascript remember to install typescript and typescript-language-server npm packages globally
-require('lspconfig').tsserver.setup{};
 -- If working in a complex c package with many compile flags, run `bear -- {compile command here}`
 -- This will generate a compile_commands.json so that the editor will corectly understand how to link up all of the files
 require('lspconfig').clangd.setup{};
@@ -102,6 +100,8 @@ require'lspconfig'.pylsp.setup{
     }
 }
 
+require'lspconfig'.volar.setup{}
+require'lspconfig'.ts_ls.setup{}
 
 lsp.setup()
 
