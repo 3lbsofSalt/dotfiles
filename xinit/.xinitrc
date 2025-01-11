@@ -48,5 +48,5 @@ echo "Starting i3"
 sh ~/.fehbg &
 setxkbmap us -variant colemak
 setxkbmap -option caps:escape
-nvidia-settings &
+obsidian &
 exec i3
