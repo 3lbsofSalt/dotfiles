@@ -4,7 +4,8 @@ local cmp_action = require('lsp-zero').cmp_action()
 lsp.ensure_installed({
     'clangd',
     'ltex',
-    'rust_analyzer'
+    'rust_analyzer',
+    'ts_ls',
 })
 
 local cmp = require('cmp')
@@ -62,8 +63,6 @@ require('lspconfig').lua_ls.setup{
     }
 
 };
--- If developing javascript remember to install typescript and typescript-language-server npm packages globally
-require('lspconfig').ts_ls.setup{};
 -- If working in a complex c package with many compile flags, run `bear -- {compile command here}`
 -- This will generate a compile_commands.json so that the editor will corectly understand how to link up all of the files
 require('lspconfig').clangd.setup{};
@@ -94,18 +93,30 @@ require'lspconfig'.pyright.setup{};
 
 --[[
 require'lspconfig'.pylsp.setup{
-  settings = {
-    pylsp = {
-      plugins = {
-        pycodestyle = {
-          ignore = {'E501', 'E231', 'E302', 'W293', 'E275', 'E303', 'W291', 'E261', 'E305'}, -- Rules at https://pycodestyle.pycqa.org/en/latest/intro.html#configuration
-          maxLineLength = 100
+    settings = {
+        pylsp = {
+            plugins = {
+                pycodestyle = {
+                    ignore = {'E501', 'E231', 'E302', 'W293', 'E275', 'E303', 'W291', 'E261', 'E305'}, -- Rules at https://pycodestyle.pycqa.org/en/latest/intro.html#configuration
+                    maxLineLength = 100
+                }
+            }
         }
-      }
     }
-  }
 }
 
+require'lspconfig'.volar.setup {
+    -- add filetypes for typescript, javascript and vue
+    filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+    init_options = {
+      vue = {
+        -- disable hybrid mode
+        hybridMode = false,
+      },
+    },
+  }
+
+--require'lspconfig'.ts_ls.setup{}
 
 lsp.setup()
 

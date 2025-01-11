@@ -2,6 +2,9 @@
 
 Enjoy these dotfiles! Below are some things to watch out for:
 
+## Note
+Before use, please ensure that you have a `~/.config` directory and a `~/.local/[share,bin,state]` directory or things get weird
+
 ## How To Use
 Navigate to the root directory and execute `stow [DIRECTORY NAME]` where `DIRECTORY NAME` is the name of
 the directory for the tool or program you would like to configure. Ensure that
