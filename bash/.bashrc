@@ -68,3 +68,4 @@ eval "$(pyenv init -)"
 
 [[ -f ~/.bashrc.me ]] && . ~/.bashrc.me
 . "$HOME/.cargo/env"
+

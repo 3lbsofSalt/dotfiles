@@ -90,8 +90,17 @@ require('lspconfig').html.setup{};
 require('lspconfig').cssls.setup{};
 require'lspconfig'.pyright.setup{};
 
+require'lspconfig'.volar.setup {
+    -- add filetypes for typescript, javascript and vue
+    filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+    init_options = {
+        vue = {
+            -- disable hybrid mode
+            hybridMode = false,
+        },
+    },
+}
 
---[[
 require'lspconfig'.pylsp.setup{
     settings = {
         pylsp = {
@@ -104,19 +113,6 @@ require'lspconfig'.pylsp.setup{
         }
     }
 }
-
-require'lspconfig'.volar.setup {
-    -- add filetypes for typescript, javascript and vue
-    filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
-    init_options = {
-      vue = {
-        -- disable hybrid mode
-        hybridMode = false,
-      },
-    },
-  }
-
---require'lspconfig'.ts_ls.setup{}
 
 lsp.setup()
 
