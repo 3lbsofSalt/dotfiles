@@ -21,6 +21,7 @@ require("lazy").setup({
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
     { 'nvim-treesitter/nvim-treesitter', },
+    { "ellisonleao/gruvbox.nvim", priority = 1000 , config = true },
     {
         "neanias/everforest-nvim",
         config = function()

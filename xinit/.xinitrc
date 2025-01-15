@@ -41,7 +41,7 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
 fi
 
 # Run a specific .xinitrc
-sh [[ -f ~/.xinitrc.me ]] && sh ~/.xinitrc.me
+[ -f ~/.xinitrc.me ] && sh ~/.xinitrc.me
 
 autorandr --change
 echo "Starting i3"
@@ -49,4 +49,5 @@ sh ~/.fehbg &
 setxkbmap us -variant colemak
 setxkbmap -option caps:escape
 obsidian &
-exec i3
+# If a .xinitrc.alt exists, it MUST call exec for some sort of window manager
+[ -f ~/.xinitrc.alt ] && sh ~/.xinitrc.alt || exec i3

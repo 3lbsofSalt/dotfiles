@@ -11,6 +11,9 @@ the directory for the tool or program you would like to configure. Ensure that
 you have the software installed which makes use of the relevant configuration
 files or stowing them will be pointless.
 
+#### Note
+dwm-code is not a dotfile directory, but rather just my own dwn clone
+
 ### Machine Specific Environment Variables
 The `~/.bash_env` file is sourced by `~/.profile` and is a file I came up with.
 If you want to have some machine specific environment variables, but don't
