@@ -50,4 +50,4 @@ setxkbmap us -variant colemak
 setxkbmap -option caps:escape
 obsidian &
 # If a .xinitrc.alt exists, it MUST call exec for some sort of window manager
-[ -f ~/.xinitrc.alt ] && sh ~/.xinitrc.alt || exec i3
+[ -f ~/.xinitrc.alt ] && sh ~/.xinitrc.alt
