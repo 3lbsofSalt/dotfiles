@@ -65,7 +65,9 @@ require('lspconfig').lua_ls.setup{
 };
 -- If working in a complex c package with many compile flags, run `bear -- {compile command here}`
 -- This will generate a compile_commands.json so that the editor will corectly understand how to link up all of the files
-require('lspconfig').clangd.setup{};
+require('lspconfig').clangd.setup{
+    filetypes = {"c"}
+};
 require'lspconfig'.rust_analyzer.setup{}
 
 require('lspconfig').gdscript.setup{};
@@ -120,6 +122,7 @@ require('lspconfig')['hls'].setup{
   filetypes = { 'haskell', 'lhaskell', 'cabal' },
 }
 
+require'lspconfig'.buf_ls.setup{}
 lsp.setup()
 
 --[[
