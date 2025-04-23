@@ -69,3 +69,5 @@ eval "$(pyenv init -)"
 [[ -f ~/.bashrc.me ]] && . ~/.bashrc.me
 . "$HOME/.cargo/env"
 
+
+[ -f "/home/3lbsofSalt/.ghcup/env" ] && . "/home/3lbsofSalt/.ghcup/env" # ghcup-env

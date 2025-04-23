@@ -12,3 +12,5 @@ export EDITOR='/usr/bin/nvim'
 [[ -f ~/.bash_env ]] && . ~/.bash_env
 
 . "$HOME/.cargo/env"
+
+[ -f "/home/3lbsofSalt/.ghcup/env" ] && . "/home/3lbsofSalt/.ghcup/env" # ghcup-env

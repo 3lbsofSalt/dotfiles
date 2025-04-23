@@ -89,6 +89,7 @@ require'lspconfig'.jdtls.setup{}
 require('lspconfig').html.setup{};
 require('lspconfig').cssls.setup{};
 require'lspconfig'.pyright.setup{};
+require'lspconfig'.gopls.setup{};
 
 require'lspconfig'.volar.setup {
     -- add filetypes for typescript, javascript and vue
@@ -112,6 +113,11 @@ require'lspconfig'.pylsp.setup{
             }
         }
     }
+}
+
+require'lspconfig'.ocamllsp.setup{}
+require('lspconfig')['hls'].setup{
+  filetypes = { 'haskell', 'lhaskell', 'cabal' },
 }
 
 lsp.setup()
