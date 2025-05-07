@@ -6,6 +6,7 @@ lsp.ensure_installed({
     'ltex',
     'rust_analyzer',
     'ts_ls',
+    'volar'
 })
 
 local cmp = require('cmp')
