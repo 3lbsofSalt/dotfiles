@@ -90,6 +90,7 @@ require("lazy").setup({
     build = ":UpdateRemotePlugins",
     init = function()
       vim.g.molten_output_win_max_height = 12
+            require("molten").setup{}
     end,
     dependencies = { '3rd/image.nvim' },
     lazy = true

@@ -1,4 +1,7 @@
 export PATH=$PATH:$HOME/programs/shell/dmenu:$HOME/.global_node_modules/bin:
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
 
 # Place user specific binaries here. Especially ones that you would like to
 # keep in the repository
@@ -14,3 +17,9 @@ export EDITOR='/usr/bin/nvim'
 . "$HOME/.cargo/env"
 
 [ -f "/home/3lbsofSalt/.ghcup/env" ] && . "/home/3lbsofSalt/.ghcup/env" # ghcup-env
+
+if [ -f ~/.wayinitrc ]; then 
+    exec ~/.wayinitrc
+elif [ -f ~/.xinitrc ]; then 
+    exec startx
+fi
