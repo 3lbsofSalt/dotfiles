@@ -177,3 +177,4 @@ way-displays > /tmp/way-displays.${XDG_VTNR}.${USER}.log 2>&1 &
 riverctl default-layout rivertile
 rivertile -view-padding 6 -outer-padding 6 &
 ~/.wayland_bar &
+swaybg --image ~/Pictures/Wallpapers/LoneTreePainting.jpeg --mode fill &
