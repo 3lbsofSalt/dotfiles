@@ -1,6 +1,6 @@
 export PATH=$PATH:$HOME/programs/shell/dmenu:$HOME/.global_node_modules/bin:
 if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
+    PATH="$HOME/bin:$(pyenv root)/shims:$PATH"
 fi
 
 # Place user specific binaries here. Especially ones that you would like to

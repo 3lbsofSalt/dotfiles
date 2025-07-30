@@ -1,0 +1,4 @@
+#!/bin/bash
+
+riverctl keyboard-layout us
+echo "qwerty" > ~/.cache/current_keymap

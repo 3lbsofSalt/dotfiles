@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ "$1" = "--short" ] || [ "$1" = "-s" ]; then
+    contents=$(cat ~/.cache/current_keymap)
+    
+    if [[ "$contents" == *"colemak"* ]]; then
+        echo "CO"
+    elif [[ "$contents" == *"qwerty"* ]]; then
+        echo "QW"
+    fi
+else
+    cat ~/.cache/current_keymap
+fi

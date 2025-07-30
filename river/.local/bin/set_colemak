@@ -1,0 +1,4 @@
+#!/bin/bash
+
+riverctl keyboard-layout -variant colemak -options caps:escape us
+echo "colemak" > ~/.cache/current_keymap
