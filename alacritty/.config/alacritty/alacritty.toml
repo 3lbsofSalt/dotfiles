@@ -5,7 +5,7 @@ term = "xterm-256color"
 size = 12
 
 [font.normal]
-family = "scientifica"
+family = "Iosevka"
 style = "Regular"
 
 [[keyboard.bindings]]

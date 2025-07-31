@@ -19,6 +19,8 @@ riverctl spawn "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG
 riverctl map normal Super+Shift Return spawn alacritty
 riverctl map normal Super+Control Return spawn "fuzzel"
 
+riverctl map normal Super+Control S spawn "capture_screenshot -c"
+
 riverctl map normal Super M spawn river-mirror-display
 
 # Super+Q to close the focused view

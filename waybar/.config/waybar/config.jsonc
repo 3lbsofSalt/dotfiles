@@ -24,8 +24,8 @@
     ],
     "custom/keyboard-layout": {
         "exec": "get_keymap -s",
-        "interval": 5,
-        "format": "⌨ {}",
+        "interval": 2,
+        "format": " {}",
         "on-click": "toggle_keymap"
     },
     "river/tags":{
@@ -68,9 +68,9 @@
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-wifi": "",
         "format-ethernet": "{ipaddr}/{cidr} ",
-        "tooltip-format": "{ifname} via {gwaddr} ",
+        "tooltip-format": "{essid} ({signalStrength}%)",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"

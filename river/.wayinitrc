@@ -1,6 +1,5 @@
 #!/bin/sh
 if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-    export $XDG_CURRENT_DESKTOP=river
     export XDG_SESSION_TYPE=wayland
     export XDG_SESSION_DESKTOP=river
     # Getting xdg-portal to work

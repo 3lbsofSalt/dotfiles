@@ -1,12 +1,14 @@
 * {
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    font-family: "Iosevka", FontAwesome, Helvetica, Roboto, Arial, sans-serif;
     font-size: 13px;
+    margin: 0px;
+    padding: 0px;
 }
 
 window#waybar {
     background-color: rgba(43, 48, 59, 0.5);
-    border-bottom: 3px solid rgba(100, 114, 125, 0.5);
+    /*(border-bottom: 3px solid rgba(100, 114, 125, 0.5);*/
     color: #ffffff;
     transition-property: background-color;
     transition-duration: .5s;
@@ -54,7 +56,7 @@ button:hover {
 }
 
 #workspaces button {
-    padding: 0 5px;
+    padding: 0 0px;
     background-color: transparent;
     color: #ffffff;
 }
@@ -95,13 +97,13 @@ button:hover {
 #scratchpad,
 #power-profiles-daemon,
 #mpd {
-    padding: 0 10px;
+    padding: 0 8px;
     color: #ffffff;
 }
 
 #window,
 #workspaces {
-    margin: 0 4px;
+    margin: 0 0px;
 }
 
 /* If workspaces is the leftmost module, omit left margin */
@@ -257,49 +259,16 @@ label:focus {
     color: #2d3436;
 }
 
-#mpd {
-    background-color: #66cc99;
-    color: #2a5c45;
-}
-
-#mpd.disconnected {
-    background-color: #f53c3c;
-}
-
-#mpd.stopped {
-    background-color: #90b1b1;
-}
-
-#mpd.paused {
-    background-color: #51a37a;
-}
-
-#language {
-    background: #00b093;
-    color: #740864;
-    padding: 0 5px;
-    margin: 0 5px;
-    min-width: 16px;
-}
-
 #keyboard-layout {
     background: #97e1ad;
     color: #000000;
     padding: 0 0px;
-    margin: 0 5px;
-    min-width: 16px;
-}
-
-#keyboard-state {
-    background: #97e1ad;
-    color: #000000;
-    padding: 0 0px;
-    margin: 0 5px;
+    margin: 0 0px;
     min-width: 16px;
 }
 
 #keyboard-state > label {
-    padding: 0 5px;
+    padding: 0 0px;
 }
 
 #keyboard-state > label.locked {
@@ -319,7 +288,7 @@ label:focus {
 }
 
 #privacy-item {
-    padding: 0 5px;
+    padding: 0 0px;
     color: white;
 }
 
@@ -335,16 +304,22 @@ label:focus {
     background-color: #0069d4;
 }
 
+#tags {
+    margin: 2px;
+    border: 0px solid black;
+    border-radius: 0px;
+}
+
+
+#tags button:first-child {
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
 #tags button {
-    padding-top: 0px;
-    padding-bottom: 0px;
-    padding-left: 2px;
-    padding-right: 2px;
-    margin: 4px;
-    margin-bottom: 2px;
-    margin-top: 2px;
-    border-top: 2px rgba(0, 0, 0, 0) solid;
-    border-bottom: 2px rgba(0, 0, 0, 0) solid;
+    padding: 0px 4px;
+    border-top: 0px rgba(0, 0, 0, 0) solid;
+    border-bottom: 0px rgba(0, 0, 0, 0) solid;
 }
 
 #tags button.occupied {
