@@ -29,6 +29,7 @@ you don't commit it to the repository!__
 
 ### *_Theme Files
 
+**This section no longer applies to the river window manager**
 These files generally contain a wallpaper, a polybar config, and a `.fehbg` file.
 The `.fehbg` file needs to be changed to reflect the username of the directory stow is stored in.
 
@@ -39,7 +40,7 @@ The `.fehbg` file needs to be changed to reflect the username of the directory s
 - https://github.com/ogham/exa
 
 
-#### Required Packages List
+#### Required Packages List/Specific Setup Instructions
 
 ##### River
 - `wl-mirror`
@@ -57,3 +58,7 @@ The `.fehbg` file needs to be changed to reflect the username of the directory s
 - `luarocks` - `magick` (need luarocks 5.1 to install magick, just make and build it from scratch. Use the following command to configure luarocks 5.1: `./configure --lua-version=5.1 --versioned-rocks-dir --prefix="${HOME}/.luarocks51" --lua-suffix=5.1`)
 - `ueberzug`
 - needs the pip packages: `jupytext jupyter_client pynvim`
+
+##### Alacritty
+Get the Iosevka font installed (`pacman -S ttc-iosevka`). 
+If you want themes, follow the instructions here: [](https://github.com/alacritty/alacritty-theme)
