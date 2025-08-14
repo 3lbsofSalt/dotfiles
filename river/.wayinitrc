@@ -1,0 +1,9 @@
+#!/bin/sh
+if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+    export XDG_SESSION_TYPE=wayland
+    export XDG_SESSION_DESKTOP=river
+    # Getting xdg-portal to work
+    systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+    dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=river
+    exec river
+fi

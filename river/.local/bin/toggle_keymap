@@ -1,0 +1,9 @@
+#!/bin/bash
+
+keymap=$(cat ~/.cache/current_keymap)
+
+if [[ "$keymap" == *"colemak"* ]]; then
+    set_qwerty
+elif [[ "$keymap" == *"qwerty"* ]]; then
+    set_colemak
+fi
