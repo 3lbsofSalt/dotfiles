@@ -19,12 +19,16 @@ riverctl spawn "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG
 riverctl map normal Super+Shift Return spawn alacritty
 riverctl map normal Super+Control Return spawn "fuzzel"
 
+riverctl map normal Mod1+Shift Return spawn alacritty
+riverctl map normal Mod1+Control Return spawn "fuzzel"
+
 riverctl map normal Super+Control S spawn "capture_screenshot -c"
 
 riverctl map normal Super M spawn river-mirror-display
 
 # Super+Q to close the focused view
 riverctl map normal Super+Shift C close
+riverctl map normal Mod1+Shift C close
 
 # Super+Shift+E to exit river
 riverctl map normal Super+Shift E exit
@@ -45,6 +49,9 @@ riverctl map normal Super Comma focus-output left
 # Super+Shift+{Period,Comma} to send the focused view to the next/previous output
 riverctl map normal Super+Shift Period send-to-output -current-tags right
 riverctl map normal Super+Shift Comma send-to-output -current-tags left
+
+riverctl map normal Mod1+Shift Period send-to-output -current-tags right
+riverctl map normal Mod1+Shift Comma send-to-output -current-tags left
 
 # Super+Return to bump the focused view to the top of the layout stack
 riverctl map normal Super Return zoom
@@ -94,9 +101,11 @@ do
 
     # Super+[1-9] to focus tag [0-8]
     riverctl map normal Super $i set-focused-tags $tags
+    riverctl map normal Mod1 $i set-focused-tags $tags
 
     # Super+Shift+[1-9] to tag focused view with tag [0-8]
     riverctl map normal Super+Shift $i set-view-tags $tags
+    riverctl map normal Mod1+Shift $i set-view-tags $tags
 
     # Super+Control+[1-9] to toggle focus of tag [0-8]
     riverctl map normal Super+Control $i toggle-focused-tags $tags
@@ -113,6 +122,7 @@ riverctl map normal Super+Shift 0 set-view-tags $all_tags
 
 # Super+Space to toggle float
 riverctl map normal Super Space toggle-float
+riverctl map normal Mod1 Space toggle-float
 
 # Super+F to toggle fullscreen
 riverctl map normal Super F toggle-fullscreen
@@ -163,6 +173,7 @@ riverctl border-color-unfocused 0x586e75
 
 # riverctl keyboard-layout -variant colemak -options caps:escape us
 set_colemak
+riverctl keyboard-layout -variant colemak -options caps:escape us
 
 # Set keyboard repeat rate
 riverctl set-repeat 50 300
