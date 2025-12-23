@@ -96,6 +96,7 @@ require'lspconfig'.gopls.setup{};
 
 -- This Vue_Ls Config Was Grabbed from Here: https://github.com/vuejs/language-tools/wiki/Neovim
 local vue_language_server_path = vim.fn.expand '$MASON/packages' .. '/vue-language-server' .. '/node_modules/@vue/language-server'
+print(vue_language_server_path)
 local tsserver_filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' }
 local vue_plugin = {
   name = '@vue/typescript-plugin',
@@ -191,4 +192,5 @@ require('lspconfig')['hls'].setup{
 }
 
 require'lspconfig'.buf_ls.setup{}
+vim.lsp.enable('postgres_lsp')
 lsp.setup()

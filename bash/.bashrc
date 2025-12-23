@@ -71,3 +71,5 @@ eval "$(pyenv init -)"
 
 
 [ -f "/home/3lbsofSalt/.ghcup/env" ] && . "/home/3lbsofSalt/.ghcup/env" # ghcup-env
+# opencode
+export PATH=/home/3lbsofSalt/.opencode/bin:$PATH
