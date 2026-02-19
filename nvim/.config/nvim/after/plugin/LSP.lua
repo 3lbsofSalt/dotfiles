@@ -51,7 +51,7 @@ lsp.on_attach(function(_, bufnr)
     vim.keymap.set("n", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 end)
 
-require('lspconfig').lua_ls.setup{
+vim.lsp.config('lua_ls', {
     settings = {
         Lua = {
             diagnostics = {
@@ -63,36 +63,36 @@ require('lspconfig').lua_ls.setup{
         }
     }
 
-};
+})
 -- If working in a complex c package with many compile flags, run `bear -- {compile command here}`
 -- This will generate a compile_commands.json so that the editor will corectly understand how to link up all of the files
-require('lspconfig').clangd.setup{
+vim.lsp.config('clangd', {
     filetypes = {"c"}
-};
-require'lspconfig'.rust_analyzer.setup{}
+})
+vim.lsp.enable('rust_analyzer')
 
-require('lspconfig').gdscript.setup{};
-require'lspconfig'.ltex.setup{
+vim.lsp.enable('gdscript')
+vim.lsp.config('ltex', {
     settings = {
         ltex = {
             completionEnabled = true
         }
     }
-};
+})
 
 --Enable (broadcasting) snippet capability for completion
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-require'lspconfig'.cssls.setup {
+vim.lsp.config('cssls', {
     capabilities = capabilities,
-}
+})
 
-require'lspconfig'.jdtls.setup{}
-require('lspconfig').html.setup{};
-require('lspconfig').cssls.setup{};
-require'lspconfig'.pyright.setup{};
-require'lspconfig'.gopls.setup{};
+vim.lsp.enable('jdtls')
+vim.lsp.enable('html')
+vim.lsp.enable('cssls')
+vim.lsp.enable('pyright')
+vim.lsp.enable('gopls')
 
 -- This Vue_Ls Config Was Grabbed from Here: https://github.com/vuejs/language-tools/wiki/Neovim
 local vue_language_server_path = vim.fn.expand '$MASON/packages' .. '/vue-language-server' .. '/node_modules/@vue/language-server'
@@ -173,7 +173,7 @@ vim.lsp.config('ts_ls', ts_ls_config)
 vim.lsp.enable({'vtsls', 'vue_ls'}) -- If using `ts_ls` replace `vtsls` to `ts_ls`
 -- End Vue Ls Setup
 
-require'lspconfig'.pylsp.setup{
+vim.lsp.config('pylsp', {
     settings = {
         pylsp = {
             plugins = {
@@ -184,13 +184,13 @@ require'lspconfig'.pylsp.setup{
             }
         }
     }
-}
+})
 
-require'lspconfig'.ocamllsp.setup{}
-require('lspconfig')['hls'].setup{
+vim.lsp.enable('ocamllsp')
+vim.lsp.config('hls', {
   filetypes = { 'haskell', 'lhaskell', 'cabal' },
-}
+})
 
-require'lspconfig'.buf_ls.setup{}
 vim.lsp.enable('postgres_lsp')
+vim.lsp.enable('buf_ls')
 lsp.setup()
