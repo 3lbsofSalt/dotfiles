@@ -23,3 +23,6 @@ if [ -f ~/.wayinitrc ]; then
 elif [ -f ~/.xinitrc ]; then 
     exec startx
 fi
+
+# opencode
+export PATH=/home/max/.opencode/bin:$PATH
