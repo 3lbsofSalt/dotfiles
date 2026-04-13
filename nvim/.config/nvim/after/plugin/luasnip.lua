@@ -1,7 +1,7 @@
-local ls = require("luasnip");
+local ls = require("luasnip")
 
 ls.setup({
-  enable_autosnippets=true
-});
+  enable_autosnippets = true,
+})
 
--- most of the luasnip configuration is setup in LSP.lua
+-- Snippet loading and cmp integration are configured in LSP.lua

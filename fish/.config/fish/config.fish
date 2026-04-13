@@ -7,6 +7,10 @@ alias gdv='nvim --listen ./godothost'
 
 set -Ux MANPAGER "nvim +Man!"
 
+fish_add_path $HOME/.local/bin
+fish_add_path $HOME/go/bin
+fish_add_path $HOME/.npm-global/bin
+
 
 # BEGIN opam configuration
 # This is useful if you're using opam as it adds:

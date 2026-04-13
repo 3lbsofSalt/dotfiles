@@ -56,7 +56,10 @@ require("lazy").setup({
     tag = '0.1.4',
     dependencies = { 'nvim-lua/plenary.nvim' }
   },
-  { 'nvim-treesitter/nvim-treesitter', },
+  {
+    'nvim-treesitter/nvim-treesitter',
+    build = ':TSUpdate',
+  },
   { "ellisonleao/gruvbox.nvim", priority = 1000 , config = true },
   {
     "neanias/everforest-nvim",
@@ -64,34 +67,18 @@ require("lazy").setup({
       require("everforest").setup()
     end,
   },
-  'nvim-treesitter/playground',
+  -- nvim-treesitter/playground is archived; :InspectTree (built into nvim 0.9+) replaces it.
   'ThePrimeagen/harpoon',
   'mbbill/undotree',
   'tpope/vim-fugitive',
+  { 'neovim/nvim-lspconfig' },
   {
-    'VonHeikemen/lsp-zero.nvim',
-    branch = 'v2.x',
-    dependencies = {
-      -- LSP Support
-      {'neovim/nvim-lspconfig'},             -- Required
-      {                                      -- Optional
-        'williamboman/mason.nvim',
-        build = function()
-          pcall(vim.cmd, 'MasonUpdate')
-        end,
-      },
-      {'williamboman/mason-lspconfig.nvim'}, -- Optional
-
-      -- Autocompletion
-      {'hrsh7th/nvim-cmp'},     -- Required
-      {'hrsh7th/cmp-nvim-lsp'}, -- Required
-      {
-        "L3MON4D3/LuaSnip",
-        version = "v2.*",
-        build = "make install_jsregexp"
-      }
-    }
+    'williamboman/mason.nvim',
+    build = function() pcall(vim.cmd, 'MasonUpdate') end,
   },
+  { 'williamboman/mason-lspconfig.nvim' },
+  { 'hrsh7th/nvim-cmp' },
+  { 'hrsh7th/cmp-nvim-lsp' },
   {
     "windwp/nvim-autopairs",
     config = function() require("nvim-autopairs").setup {} end
@@ -148,26 +135,51 @@ require("lazy").setup({
     "benlubas/molten-nvim",
     version = "^1.0.0", -- use version <2.0.0 to avoid breaking changes
     build = ":UpdateRemotePlugins",
-    lazy=false,
-
+    lazy = false, -- must be eager for remote plugin registration
+    cond = function()
+      if vim.fn.executable('jupyter') == 0 then
+        vim.schedule(function()
+          vim.notify("molten-nvim: 'jupyter' not found in PATH, plugin skipped", vim.log.levels.WARN)
+        end)
+        return false
+      end
+      return true
+    end,
   },
   {
     "GCBallesteros/jupytext.nvim",
+    lazy = false, -- must be eager to intercept .ipynb on open
+    cond = function()
+      if vim.fn.executable('jupytext') == 0 then
+        vim.schedule(function()
+          vim.notify("jupytext.nvim: 'jupytext' not found in PATH, plugin skipped", vim.log.levels.WARN)
+        end)
+        return false
+      end
+      return true
+    end,
     config = true,
-    -- Depending on your nvim distro or config you may need to make the loading not lazy
-    lazy=false,
   },
   {
     "quarto-dev/quarto-nvim",
+    ft = { 'quarto' },
+    event = { 'User MoltenInitPost' },
     dependencies = {
       "jmbuhr/otter.nvim",
       "nvim-treesitter/nvim-treesitter",
     },
-    config = function() 
+    cond = function()
+      if vim.fn.executable('quarto') == 0 then
+        vim.schedule(function()
+          vim.notify("quarto-nvim: 'quarto' not found in PATH, plugin skipped", vim.log.levels.WARN)
+        end)
+        return false
+      end
+      return true
+    end,
+    config = function()
       require("quarto").setup({
-        debug = true,
         lspFeatures = {
-          -- NOTE: put whatever languages you want here:
           enabled = true,
           languages = { "python" },
           chunks = "all",
@@ -180,7 +192,6 @@ require("lazy").setup({
           },
         },
         keymap = {
-          -- NOTE: setup your own keymaps:
           hover = "H",
           definition = "gd",
           rename = "<leader>rn",
@@ -192,15 +203,24 @@ require("lazy").setup({
           default_method = "molten",
         },
       })
-    end
+    end,
   },
   {
     "3rd/image.nvim",
     version = "1.3.0",
+    cond = function()
+      if vim.fn.executable('ueberzugpp') == 0 then
+        vim.schedule(function()
+          vim.notify("image.nvim: 'ueberzugpp' not found in PATH, plugin skipped", vim.log.levels.WARN)
+        end)
+        return false
+      end
+      return true
+    end,
     dependencies = {
       {
         "vhyrro/luarocks.nvim",
-        priority = 1001, -- this plugin needs to run before anything else
+        priority = 1001, -- must run before anything else
         opts = {
           rocks = { "magick" },
         },
@@ -209,16 +229,15 @@ require("lazy").setup({
     config = function()
       require("image").setup({
         backend = "ueberzug",
-        integrations = {}, -- do whatever you want with image.nvim's integrations
-        max_width = 100, -- tweak to preference
-        max_height = 12, -- ^
-        max_height_window_percentage = math.huge, -- this is necessary for a good experience
+        integrations = {},
+        max_width = 100,
+        max_height = 12,
+        max_height_window_percentage = math.huge,
         max_width_window_percentage = math.huge,
         window_overlap_clear_enabled = true,
         window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
       })
-    end
-
+    end,
   }
 
 });

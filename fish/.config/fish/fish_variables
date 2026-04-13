@@ -3,3 +3,4 @@
 SETUVAR --export MANPAGER:nvim\x20\x2bMan\x21
 SETUVAR __fish_initialized:4300
 SETUVAR fish_greeting:\x1d
+SETUVAR fish_user_paths:/home/max/\x2enpm\x2dglobal/bin\x1e/home/max/go/bin\x1e/home/max/\x2elocal/bin

@@ -1,3 +1,6 @@
+-- Skip config if molten was not loaded (e.g. jupyter not in PATH)
+if not pcall(require, "molten") then return end
+
 vim.g.molten_image_provider = "image.nvim"
 -- vim.g.molten_output_win_max_height = 20
 vim.g.molten_virt_text_output = true
