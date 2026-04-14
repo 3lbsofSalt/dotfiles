@@ -1,5 +1,12 @@
-[env]
-term = "xterm-256color"
+[general]
+import = [
+  "~/.config/alacritty/dank-theme.toml"
+]
+
+[window]
+decorations = "None"
+padding = { x = 12, y = 12 }
+opacity = 1.0
 
 [font]
 size = 12
@@ -8,23 +15,35 @@ size = 12
 family = "Iosevka"
 style = "Regular"
 
-[[keyboard.bindings]]
-action = "SpawnNewInstance"
-key = "Return"
-mods = "Control|Shift"
 
-[window]
-dynamic_padding = true
-opacity = 0.8
+[scrolling]
+history = 3023
 
-[window.padding]
-x = 5
-y = 7
+[cursor]
+style = { shape = "Block", blinking = "On" }
+blink_interval = 500
+unfocused_hollow = true
+
+[selection]
+save_to_clipboard = false
 
 [terminal]
 shell = "fish"
 
-[[keyboard.bindings]]
-key = "Return"
-mods = "Shift"
-chars = "\u001B\r"
+[bell]
+duration = 0
+
+[keyboard]
+bindings = [
+  { key = "C",       mods = "Control|Shift", action = "Copy"  },
+  { key = "V",       mods = "Control|Shift", action = "Paste" },
+  { key = "N",       mods = "Control|Shift", action = "SpawnNewInstance" },
+  { key = "Equals",  mods = "Control|Shift", action = "IncreaseFontSize" },
+  { key = "Minus",   mods = "Control",       action = "DecreaseFontSize" },
+  { key = "Key0",    mods = "Control",       action = "ResetFontSize"    },
+  { key = "Enter",   mods = "Shift",         chars = "\n" },
+  # User Defined
+  { key = "Return",  mods = "Control|Shift", action = "SpawnNewInstance"},
+]
+
+

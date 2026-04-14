@@ -18,9 +18,10 @@ export EDITOR='/usr/bin/nvim'
 
 [ -f "/home/3lbsofSalt/.ghcup/env" ] && . "/home/3lbsofSalt/.ghcup/env" # ghcup-env
 
-if [ -f ~/.wayinitrc ]; then 
+
+if [ -f ~/.wayinitrc ] && [ -n "${XDG_VTNR}" ] && [ "${XDG_VTNR}" -le 2 ]; then
     exec ~/.wayinitrc
-elif [ -f ~/.xinitrc ]; then 
+elif [ -f ~/.xinitrc ] && [ -n "${XDG_VTNR}" ] && [ "${XDG_VTNR}" -le 2 ]; then
     exec startx
 fi
 
