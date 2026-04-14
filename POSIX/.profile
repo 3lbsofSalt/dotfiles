@@ -19,8 +19,12 @@ export EDITOR='/usr/bin/nvim'
 [ -f "/home/3lbsofSalt/.ghcup/env" ] && . "/home/3lbsofSalt/.ghcup/env" # ghcup-env
 
 
-if [ -f ~/.wayinitrc ] && [ -n "${XDG_VTNR}" ] && [ "${XDG_VTNR}" -le 2 ]; then
-    exec ~/.wayinitrc
+echo "profile sourced"
+if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" = "1" ]; then
+	export XDG_SESSION_TYPE=wayland
+	export XDG_SESSION_DESKTOP=niri
+	export XDG_CURRENT_DESKTOP=niri
+	niri-session &
 elif [ -f ~/.xinitrc ] && [ -n "${XDG_VTNR}" ] && [ "${XDG_VTNR}" -le 2 ]; then
     exec startx
 fi
