@@ -53,8 +53,11 @@ require("lazy").setup({
   { 'stevearc/oil.nvim', opts = {}, },
   {
     'nvim-telescope/telescope.nvim',
-    tag = '0.1.4',
-    dependencies = { 'nvim-lua/plenary.nvim' }
+    tag = 'v0.2.2',
+    dependencies = { 
+      'nvim-lua/plenary.nvim',
+      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+    }
   },
   {
     'nvim-treesitter/nvim-treesitter',
@@ -63,8 +66,14 @@ require("lazy").setup({
   { "ellisonleao/gruvbox.nvim", priority = 1000 , config = true },
   {
     "neanias/everforest-nvim",
+    version = false,
+    lazy = false,
+    priority = 1000, -- make sure to load this before all the other start plugins
+    -- Optional; default configuration will be used if setup isn't called.
     config = function()
-      require("everforest").setup()
+      require("everforest").setup({
+        -- Your config here
+      })
     end,
   },
   -- nvim-treesitter/playground is archived; :InspectTree (built into nvim 0.9+) replaces it.
