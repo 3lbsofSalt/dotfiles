@@ -3,6 +3,7 @@ require('mason-lspconfig').setup({
     ensure_installed = {
         'clangd',
         'ltex',
+        'pyright',
         'rust_analyzer',
         'vue_ls',
         'vtsls',
@@ -65,15 +66,14 @@ vim.lsp.config('hls', {
     filetypes = { 'haskell', 'lhaskell', 'cabal' },
 })
 
-vim.lsp.config('pylsp', {
+vim.lsp.config('pyright', {
     settings = {
-        pylsp = {
-            plugins = {
-                pycodestyle = {
-                    -- Rules: https://pycodestyle.pycqa.org/en/latest/intro.html#configuration
-                    ignore = { 'E501', 'E231', 'E302', 'W293', 'E275', 'E303', 'W291', 'E261', 'E305' },
-                    maxLineLength = 100,
-                },
+        python = {
+            analysis = {
+                typeCheckingMode = 'basic',
+                autoSearchPaths = true,
+                useLibraryCodeForTypes = true,
+                diagnosticMode = 'openFilesOnly',
             },
         },
     },
@@ -144,7 +144,6 @@ vim.lsp.enable({
     'html',
     'cssls',
     'pyright',
-    'pylsp',
     'gopls',
     'ocamllsp',
     'hls',
