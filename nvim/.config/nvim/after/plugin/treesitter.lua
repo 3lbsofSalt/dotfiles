@@ -1,46 +1,45 @@
-local ok, configs = pcall(require, 'nvim-treesitter.config')
+-- nvim-treesitter is on the `main` branch, which dropped the old configs.setup{ensure_installed, highlight, indent}
+-- API. Now it only installs parsers; highlighting/indent are started per buffer with Neovim's built-in treesitter.
+-- Requires the `tree-sitter` CLI.
+local ok, ts = pcall(require, 'nvim-treesitter')
 if not ok then return end
 
-configs.setup {
-  ensure_installed = {
-    -- Core
-    "lua", "vim", "vimdoc", "query",
-    -- Languages in use (mirrors LSP setup)
-    "c", "rust", "go",
-    "javascript", "typescript", "tsx", "vue",
-    "python",
-    "java",
-    "haskell", "ocaml",
-    "latex",
-    -- Markup / config (generally useful everywhere)
-    "markdown", "markdown_inline", -- both required; markdown_inline handles inline spans
-    "html", "css",
-    "json", "yaml", "toml",
-    "bash",
-  },
+-- Installs anything missing (async; no-op for parsers already installed)
+ts.install({
+  -- Core
+  "lua", "vim", "vimdoc", "query",
+  -- Languages in use (mirrors LSP setup)
+  "c", "rust", "go",
+  "javascript", "typescript", "tsx", "vue",
+  "python",
+  "java",
+  "haskell", "ocaml",
+  "latex",
+  -- Markup / config. markdown + markdown_inline are what highlight ```python blocks in notebooks
+  "markdown", "markdown_inline",
+  "css",
+  "json", "yaml", "toml",
+  "bash",
+})
 
-  sync_install = false,
+local skip = { html = true }        -- never use treesitter for html
+local no_ts_indent = { python = true } -- treesitter indent is unreliable for python; use built-in
 
-  -- auto_install downloads parsers on first open for any language not listed
-  -- above. Requires the tree-sitter CLI to be installed locally.
-  auto_install = true,
+vim.api.nvim_create_autocmd("FileType", {
+  group = vim.api.nvim_create_augroup("3lbsofSalt_treesitter", { clear = true }),
+  callback = function(args)
+    local lang = vim.treesitter.language.get_lang(args.match)
+    if not lang or skip[lang] then return end
 
-  -- Prevent html from being auto-installed AND disable its highlight so that
-  -- treesitter doesn't apply to html even if the parser is already on disk.
-  ignore_install = { "html" },
+    -- Like the old auto_install: fetch a parser the first time a supported filetype is opened
+    if not vim.treesitter.language.add(lang) then
+      if vim.tbl_contains(ts.get_available(), lang) then ts.install({ lang }) end
+      return
+    end
 
-  highlight = {
-    enable = true,
-    disable = { "html" },
-
-    -- Run regex highlighting alongside treesitter for markdown so that
-    -- conceal / syntax-based plugins (e.g. vim-markdown) still work.
-    additional_vim_regex_highlighting = { "markdown" },
-  },
-
-  indent = {
-    enable = true,
-    -- treesitter indent is unreliable for python; fall back to built-in
-    disable = { "python" },
-  },
-}
+    vim.treesitter.start(args.buf, lang)
+    if not no_ts_indent[lang] then
+      vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end
+  end,
+})

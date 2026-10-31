@@ -15,17 +15,16 @@ require('mason-lspconfig').setup({
 -- Keybindings applied whenever any LSP attaches
 vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(event)
-        local opts = { buffer = event.buf, remap = false }
-        vim.keymap.set('n', 'gd',          vim.lsp.buf.definition,      opts)
-        vim.keymap.set('n', 'K',           vim.lsp.buf.hover,           opts)
-        vim.keymap.set('n', '<leader>vws', vim.lsp.buf.workspace_symbol, opts)
-        vim.keymap.set('n', '<leader>vd',  vim.diagnostic.open_float,   opts)
-        vim.keymap.set('n', '[d',          vim.diagnostic.goto_next,    opts)
-        vim.keymap.set('n', ']d',          vim.diagnostic.goto_prev,    opts)
-        vim.keymap.set('n', '<leader>vca', vim.lsp.buf.code_action,     opts)
-        vim.keymap.set('n', '<leader>vrr', vim.lsp.buf.references,      opts)
-        vim.keymap.set('n', '<leader>vrn', vim.lsp.buf.rename,          opts)
-        vim.keymap.set('n', '<C-h>',       vim.lsp.buf.signature_help,  opts)
+        local function opts(desc) return { buffer = event.buf, remap = false, desc = desc } end
+        -- [d / ]d (prev/next diagnostic) are Neovim built-in defaults
+        vim.keymap.set('n', 'gd',          vim.lsp.buf.definition,       opts("Go to definition"))
+        vim.keymap.set('n', 'K',           vim.lsp.buf.hover,            opts("Hover docs"))
+        vim.keymap.set('n', '<leader>vws', vim.lsp.buf.workspace_symbol, opts("Workspace symbols"))
+        vim.keymap.set('n', '<leader>vd',  vim.diagnostic.open_float,    opts("Line diagnostics"))
+        vim.keymap.set('n', '<leader>vca', vim.lsp.buf.code_action,      opts("Code action"))
+        vim.keymap.set('n', '<leader>vrr', vim.lsp.buf.references,       opts("References"))
+        vim.keymap.set('n', '<leader>vrn', vim.lsp.buf.rename,           opts("Rename symbol"))
+        vim.keymap.set('n', '<C-h>',       vim.lsp.buf.signature_help,   opts("Signature help"))
     end,
 })
 
