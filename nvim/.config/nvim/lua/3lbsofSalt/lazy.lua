@@ -61,6 +61,7 @@ require("lazy").setup({
   },
   {
     'nvim-treesitter/nvim-treesitter',
+    lazy = false,
     build = ':TSUpdate',
   },
   { "ellisonleao/gruvbox.nvim", priority = 1000 , config = true },
@@ -171,7 +172,7 @@ require("lazy").setup({
   },
   {
     "quarto-dev/quarto-nvim",
-    ft = { 'quarto' },
+    ft = { 'quarto', 'markdown' },
     event = { 'User MoltenInitPost' },
     dependencies = {
       "jmbuhr/otter.nvim",

@@ -1,46 +1,41 @@
-local ok, configs = pcall(require, 'nvim-treesitter.config')
+local ok, ts = pcall(require, 'nvim-treesitter')
 if not ok then return end
 
-configs.setup {
-  ensure_installed = {
-    -- Core
-    "lua", "vim", "vimdoc", "query",
-    -- Languages in use (mirrors LSP setup)
-    "c", "rust", "go",
-    "javascript", "typescript", "tsx", "vue",
-    "python",
-    "java",
-    "haskell", "ocaml",
-    "latex",
-    -- Markup / config (generally useful everywhere)
-    "markdown", "markdown_inline", -- both required; markdown_inline handles inline spans
-    "html", "css",
-    "json", "yaml", "toml",
-    "bash",
-  },
-
-  sync_install = false,
-
-  -- auto_install downloads parsers on first open for any language not listed
-  -- above. Requires the tree-sitter CLI to be installed locally.
-  auto_install = true,
-
-  -- Prevent html from being auto-installed AND disable its highlight so that
-  -- treesitter doesn't apply to html even if the parser is already on disk.
-  ignore_install = { "html" },
-
-  highlight = {
-    enable = true,
-    disable = { "html" },
-
-    -- Run regex highlighting alongside treesitter for markdown so that
-    -- conceal / syntax-based plugins (e.g. vim-markdown) still work.
-    additional_vim_regex_highlighting = { "markdown" },
-  },
-
-  indent = {
-    enable = true,
-    -- treesitter indent is unreliable for python; fall back to built-in
-    disable = { "python" },
-  },
+local parsers = {
+  -- Core
+  "lua", "vim", "vimdoc", "query",
+  -- Languages in use (mirrors LSP setup)
+  "c", "rust", "go",
+  "javascript", "typescript", "tsx", "vue",
+  "python",
+  "java",
+  "haskell", "ocaml",
+  -- Markup / config (generally useful everywhere)
+  "markdown", "markdown_inline",
+  "css",
+  "json", "yaml", "toml",
+  "bash",
 }
+
+-- Ensure parsers are installed (no-op if already present)
+ts.install(parsers)
+
+-- Enable treesitter highlighting for all filetypes that have a working parser.
+-- html is excluded: its parser produces noisy/incorrect highlights.
+vim.api.nvim_create_autocmd('FileType', {
+  callback = function(ev)
+    if ev.match == 'html' then return end
+    pcall(vim.treesitter.start)
+  end,
+})
+
+-- Treesitter-based indentation (experimental).
+-- python: unreliable indentation queries.
+-- vue: indent queries are nearly empty and snap the cursor to column 0 in script blocks.
+local no_ts_indent = { python = true, vue = true, html = true }
+vim.api.nvim_create_autocmd('FileType', {
+  callback = function(ev)
+    if no_ts_indent[ev.match] then return end
+    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  end,
+})

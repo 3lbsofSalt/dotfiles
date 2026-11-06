@@ -25,7 +25,7 @@ return {
   s({ trig = "try", dscr = "try/catch block" }, {
     t({ "try {", "\t" }),
     i(1),
-    t({ "", "} catch ("},),
+    t({ "", "} catch ("}),
     i(2, "err"),
     t({ ") {", "\t" }),
     i(3),
