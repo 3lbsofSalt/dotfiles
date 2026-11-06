@@ -13,42 +13,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  {
-    "nickjvandyke/opencode.nvim",
-    version = "*", -- Latest stable release
-    dependencies = {
-      {
-        -- `snacks.nvim` integration is recommended, but optional
-        ---@module "snacks" <- Loads `snacks.nvim` types for configuration intellisense
-        "folke/snacks.nvim",
-        optional = true,
-        opts = {
-          input = {}, -- Enhances `ask()`
-          picker = { -- Enhances `select()`
-            actions = {
-              opencode_send = function(...) return require("opencode").snacks_picker_send(...) end,
-            },
-            win = {
-              input = {
-                keys = {
-                  ["<a-a>"] = { "opencode_send", mode = { "n", "i" } },
-                },
-              },
-            },
-          },
-          terminal = {}, -- Enables the `snacks` provider
-        },
-      },
-    },
-    config = function()
-      ---@type opencode.Opts
-      vim.g.opencode_opts = {
-        -- Your configuration, if any; goto definition on the type or field for details
-      }
-
-      vim.o.autoread = true -- Required for `opts.events.reload`
-    end,
-  },
   { "lambdalisue/vim-suda" },
   { 'stevearc/oil.nvim', opts = {}, },
   {
@@ -103,34 +67,25 @@ require("lazy").setup({
     build = "make install_jsregexp"
   },
   'saadparwaiz1/cmp_luasnip',
+  { "nvim-mini/mini.icons", opts = {} }, -- icons in which-key (glyphs come from ghostty's built-in Nerd Font symbols)
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
+    -- Keymaps get their labels from each map's `desc`; this only names the prefix groups.
     opts = {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
+      spec = {
+        { "<leader>g", group = "Git" },
+        { "<leader>h", group = "Harpoon" },
+        { "<leader>m", group = "Molten / Jupyter" },
+        { "<leader>t", group = "Telescope" },
+        { "<leader>v", group = "LSP" },
+        { "<leader>w", group = "Windows" },
+      },
     },
     keys = {
-      { "<leader>m",
+      { "<leader>?",
         function() require("which-key").show({ global = false }) end,
-        desc = "Jupyter Notebook Commands",
-      },
-      { "<leader>h",
-        function() require("which-key").show({ global = false }) end,
-        desc = "Harpoon",
-      },
-      { "<leader>g",
-        function() require("which-key").show({ global = false }) end,
-        desc = "Git Commands",
-      },
-      { "<leader>t",
-        function() require("which-key").show({ global = false }) end,
-        desc = "Telescope",
-      },
-      { "<leader>w",
-        function() require("which-key").show({ global = false }) end,
-        desc = "Pane Management",
+        desc = "Buffer-local keymaps",
       },
     },
   },
@@ -142,21 +97,37 @@ require("lazy").setup({
   -- https://github.com/benlubas/molten-nvim/blob/main/docs/Notebook-Setup.md
   -- Wrap in a comment if not set up
   {
-    "benlubas/molten-nvim",
-    version = "^1.0.0", -- use version <2.0.0 to avoid breaking changes
-    build = ":UpdateRemotePlugins",
-    lazy = false, -- must be eager for remote plugin registration
-    cond = function()
-      if vim.fn.executable('jupyter') == 0 then
-        vim.schedule(function()
-          vim.notify("molten-nvim: 'jupyter' not found in PATH, plugin skipped", vim.log.levels.WARN)
-        end)
-        return false
-      end
-      return true
+    "3rd/image.nvim",
+    version = "1.5.1", -- >=1.4.0 needed for the `processor` option
+    build = false, -- don't let lazy build the magick luarock from the rockspec; we use the ImageMagick CLI
+    config = function()
+      require("image").setup({
+        backend = "kitty",
+        processor = "magick_cli",
+        max_width = 100,
+        max_height = 12,
+        max_height_window_percentage = math.huge,
+        max_width_window_percentage = math.huge,
+        window_overlap_clear_enabled = true,
+        window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
+      })
     end,
   },
   {
+    "benlubas/molten-nvim",
+    version = "^1.0.0", -- use version <2.0.0 to avoid breaking changes
+    dependencies = { "3rd/image.nvim" },
+    build = ":UpdateRemotePlugins",
+    -- Options only; keymaps live in after/plugin/molten.lua
+    init = function()
+      vim.g.molten_image_provider = "image.nvim"
+      vim.g.molten_output_win_max_height = 20
+      vim.g.molten_auto_open_output = false -- don't pop a float after every run
+      vim.g.molten_virt_text_output = true  -- show output as virtual text under the cell
+    end,
+  },
+  {
+    -- Opens .ipynb files as markdown (```python fences) so quarto's runner can execute them
     "GCBallesteros/jupytext.nvim",
     lazy = false, -- must be eager to intercept .ipynb on open
     cond = function()
@@ -168,7 +139,11 @@ require("lazy").setup({
       end
       return true
     end,
-    config = true,
+    opts = {
+      style = "markdown",
+      output_extension = "md",
+      force_ft = "markdown",
+    },
   },
   {
     "quarto-dev/quarto-nvim",
@@ -178,15 +153,7 @@ require("lazy").setup({
       "jmbuhr/otter.nvim",
       "nvim-treesitter/nvim-treesitter",
     },
-    cond = function()
-      if vim.fn.executable('quarto') == 0 then
-        vim.schedule(function()
-          vim.notify("quarto-nvim: 'quarto' not found in PATH, plugin skipped", vim.log.levels.WARN)
-        end)
-        return false
-      end
-      return true
-    end,
+    -- No cond on the quarto CLI: it's only needed for :QuartoPreview, not the cell runner.
     config = function()
       require("quarto").setup({
         lspFeatures = {
@@ -215,39 +182,5 @@ require("lazy").setup({
       })
     end,
   },
-  {
-    "3rd/image.nvim",
-    version = "1.3.0",
-    cond = function()
-      if vim.fn.executable('ueberzugpp') == 0 then
-        vim.schedule(function()
-          vim.notify("image.nvim: 'ueberzugpp' not found in PATH, plugin skipped", vim.log.levels.WARN)
-        end)
-        return false
-      end
-      return true
-    end,
-    dependencies = {
-      {
-        "vhyrro/luarocks.nvim",
-        priority = 1001, -- must run before anything else
-        opts = {
-          rocks = { "magick" },
-        },
-      },
-    },
-    config = function()
-      require("image").setup({
-        backend = "ueberzug",
-        integrations = {},
-        max_width = 100,
-        max_height = 12,
-        max_height_window_percentage = math.huge,
-        max_width_window_percentage = math.huge,
-        window_overlap_clear_enabled = true,
-        window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
-      })
-    end,
-  }
 
 });

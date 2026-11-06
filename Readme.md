@@ -52,12 +52,15 @@ The `.fehbg` file needs to be changed to reflect the username of the directory s
 - `waybar`
 
 ##### Neovim
-### For molten.nvim
-- `imageMagick`
-- `luajit`
-- `luarocks` - `magick` (need luarocks 5.1 to install magick, just make and build it from scratch. Use the following command to configure luarocks 5.1: `./configure --lua-version=5.1 --versioned-rocks-dir --prefix="${HOME}/.luarocks51" --lua-suffix=5.1`)
-- `ueberzug`
-- needs the pip packages: `jupytext jupyter_client pynvim`
+###### For molten.nvim
+molten.nvim breaks all of the time unless you do the following:
+- Use ghostty as your terminal. It supports the kitty image protocol (you can use kitty, but I have ghostty set up in these dotfiles)
+- Use uv as your python manager. This prevents python updates from breaking packages. Specifically, run the following commands:
+    - `uv python install 3.12`
+    - `uv venv --python 3.12 ~/.local/share/nvim/molten-venv`
+    - `uv pip install --python ~/.local/share/nvim/molten-venv pynvim jupyter_client nbformat pillow jupytext ipython jupyter_client cairosvg pnglatex plotly kaleido pyperclip nbformat PIL`
+    - In init.lua there is the command `vim.g.python3_host_prog = vim.fn.expand("~/.local/share/nvim/molten-venv/bin/python")` which will ensure all vim utilized python packages will come from there
+- Ensure that the `imagemagick` package is installed on your machine. We are no longer using the luarock, thank goodness.
 
 ##### Alacritty
 Get the Iosevka font installed (`pacman -S ttc-iosevka`). 

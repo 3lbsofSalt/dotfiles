@@ -1,3 +1,4 @@
+vim.g.python3_host_prog = vim.fn.expand("~/.local/share/nvim/molten-venv/bin/python")
 require("3lbsofSalt.set")
 require("3lbsofSalt.remap")
 require("3lbsofSalt.lazy")

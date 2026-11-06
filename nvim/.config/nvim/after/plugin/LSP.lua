@@ -1,31 +1,31 @@
 require('mason').setup()
 require('mason-lspconfig').setup({
-  ensure_installed = {
-    'clangd',
-    'ltex',
-    'rust_analyzer',
-    'vue_ls',
-    'vtsls',
-  },
-  -- Disable automatic enabling so we control exactly which servers start below.
-  automatic_enable = false,
+    ensure_installed = {
+        'clangd',
+        'ltex',
+        'pyright',
+        'rust_analyzer',
+        'vue_ls',
+        'vtsls',
+    },
+    -- Disable automatic enabling so we control exactly which servers start below.
+    automatic_enable = false,
 })
 
 -- Keybindings applied whenever any LSP attaches
 vim.api.nvim_create_autocmd('LspAttach', {
-  callback = function(event)
-    local opts = { buffer = event.buf, remap = false }
-    vim.keymap.set('n', 'gd',          vim.lsp.buf.definition,      opts)
-    vim.keymap.set('n', 'K',           vim.lsp.buf.hover,           opts)
-    vim.keymap.set('n', '<leader>vws', vim.lsp.buf.workspace_symbol, opts)
-    vim.keymap.set('n', '<leader>vd',  vim.diagnostic.open_float,   opts)
-    vim.keymap.set('n', '[d',          vim.diagnostic.goto_next,    opts)
-    vim.keymap.set('n', ']d',          vim.diagnostic.goto_prev,    opts)
-    vim.keymap.set('n', '<leader>vca', vim.lsp.buf.code_action,     opts)
-    vim.keymap.set('n', '<leader>vrr', vim.lsp.buf.references,      opts)
-    vim.keymap.set('n', '<leader>vrn', vim.lsp.buf.rename,          opts)
-    vim.keymap.set('n', '<C-h>',       vim.lsp.buf.signature_help,  opts)
-  end,
+    callback = function(event)
+        local function opts(desc) return { buffer = event.buf, remap = false, desc = desc } end
+        -- [d / ]d (prev/next diagnostic) are Neovim built-in defaults
+        vim.keymap.set('n', 'gd',          vim.lsp.buf.definition,       opts("Go to definition"))
+        vim.keymap.set('n', 'K',           vim.lsp.buf.hover,            opts("Hover docs"))
+        vim.keymap.set('n', '<leader>vws', vim.lsp.buf.workspace_symbol, opts("Workspace symbols"))
+        vim.keymap.set('n', '<leader>vd',  vim.diagnostic.open_float,    opts("Line diagnostics"))
+        vim.keymap.set('n', '<leader>vca', vim.lsp.buf.code_action,      opts("Code action"))
+        vim.keymap.set('n', '<leader>vrr', vim.lsp.buf.references,       opts("References"))
+        vim.keymap.set('n', '<leader>vrn', vim.lsp.buf.rename,           opts("Rename symbol"))
+        vim.keymap.set('n', '<C-h>',       vim.lsp.buf.signature_help,   opts("Signature help"))
+    end,
 })
 
 -- Server-specific configs (must be called before vim.lsp.enable)
@@ -65,14 +65,15 @@ vim.lsp.config('hls', {
   filetypes = { 'haskell', 'lhaskell', 'cabal' },
 })
 
-vim.lsp.config('pylsp', {
-  settings = {
-    pylsp = {
-      plugins = {
-        pycodestyle = {
-          -- Rules: https://pycodestyle.pycqa.org/en/latest/intro.html#configuration
-          ignore = { 'E501', 'E231', 'E302', 'W293', 'E275', 'E303', 'W291', 'E261', 'E305' },
-          maxLineLength = 100,
+vim.lsp.config('pyright', {
+    settings = {
+        python = {
+            analysis = {
+                typeCheckingMode = 'basic',
+                autoSearchPaths = true,
+                useLibraryCodeForTypes = true,
+                diagnosticMode = 'openFilesOnly',
+            },
         },
       },
     },
@@ -151,28 +152,22 @@ vim.api.nvim_create_autocmd('FileType', {
 -- won't launch). gdscript connects to the Godot editor socket rather than
 -- a mason-managed binary, so it must always be listed explicitly here.
 vim.lsp.enable({
-  'clangd',
-  'lua_ls',
-  'ltex',
-  'rust_analyzer',
-  'gdscript',
-  'jdtls',
-  'html',
-  'cssls',
-  'pyright',
-  'pylsp',
-  'gopls',
-  'ocamllsp',
-  'hls',
-  'postgres_lsp',
-  'buf_ls',
-  'vue_ls',
-  'vtsls',
-})
-
-vim.api.nvim_create_autocmd('BufWritePre', {
-  pattern = { '*.vue', '*.ts', '*.js' },
-  callback = function() vim.lsp.buf.format({ async = false }) end,
+    'clangd',
+    'lua_ls',
+    'ltex',
+    'rust_analyzer',
+    'gdscript',
+    'jdtls',
+    'html',
+    'cssls',
+    'pyright',
+    'gopls',
+    'ocamllsp',
+    'hls',
+    'postgres_lsp',
+    'buf_ls',
+    'vtsls',
+    'vue_ls',
 })
 
 -- Completion

@@ -1,51 +1,54 @@
-vim.keymap.set("n", "<leader>e", ":Oil<CR>")
+local map = vim.keymap.set
 
-vim.keymap.set("n", "k", "gk");
-vim.keymap.set("n", "gk", "k");
-vim.keymap.set("n", "j", "gj");
-vim.keymap.set("n", "gj", "j");
+map("n", "<leader>e", ":Oil<CR>", { desc = "File explorer (Oil)" })
 
-vim.keymap.set("n", "<leader>wv", vim.cmd.vsplit)
-vim.keymap.set("n", "<leader>ws", vim.cmd.split)
-vim.keymap.set("n", "<leader>wh", function() vim.cmd([[ wincmd h ]]) end)
-vim.keymap.set("n", "<leader>wH", function() vim.cmd([[ wincmd H ]]) end)
-vim.keymap.set("n", "<leader>wl", function() vim.cmd([[ wincmd l ]]) end)
-vim.keymap.set("n", "<leader>wL", function() vim.cmd([[ wincmd L ]]) end)
-vim.keymap.set("n", "<leader>wj", function() vim.cmd([[ wincmd j ]]) end)
-vim.keymap.set("n", "<leader>wJ", function() vim.cmd([[ wincmd J ]]) end)
-vim.keymap.set("n", "<leader>wk", function() vim.cmd([[ wincmd k ]]) end)
-vim.keymap.set("n", "<leader>wK", function() vim.cmd([[ wincmd K ]]) end)
-vim.keymap.set("n", "<leader>w=", function() vim.cmd([[ wincmd = ]]) end)
+-- Move by visual (wrapped) lines; g-prefixed versions move by real lines
+map("n", "k", "gk");
+map("n", "gk", "k");
+map("n", "j", "gj");
+map("n", "gj", "j");
+
+-- Windows
+map("n", "<leader>wv", vim.cmd.vsplit, { desc = "Split vertical" })
+map("n", "<leader>ws", vim.cmd.split, { desc = "Split horizontal" })
+map("n", "<leader>wh", function() vim.cmd([[ wincmd h ]]) end, { desc = "Focus left" })
+map("n", "<leader>wH", function() vim.cmd([[ wincmd H ]]) end, { desc = "Move window far left" })
+map("n", "<leader>wl", function() vim.cmd([[ wincmd l ]]) end, { desc = "Focus right" })
+map("n", "<leader>wL", function() vim.cmd([[ wincmd L ]]) end, { desc = "Move window far right" })
+map("n", "<leader>wj", function() vim.cmd([[ wincmd j ]]) end, { desc = "Focus down" })
+map("n", "<leader>wJ", function() vim.cmd([[ wincmd J ]]) end, { desc = "Move window to bottom" })
+map("n", "<leader>wk", function() vim.cmd([[ wincmd k ]]) end, { desc = "Focus up" })
+map("n", "<leader>wK", function() vim.cmd([[ wincmd K ]]) end, { desc = "Move window to top" })
+map("n", "<leader>w=", function() vim.cmd([[ wincmd = ]]) end, { desc = "Equalize sizes" })
 
 -- Allows you to move selected lines around in visual mode
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+map("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
+map("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
 
 -- Keep your cursor in the same place after a line join
-vim.keymap.set("n", "J", "mzJ`z")
+map("n", "J", "mzJ`z", { desc = "Join lines (keep cursor)" })
 
 -- Center Screen when scrolling with <C-d> and <C-u>
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
+map("n", "<C-d>", "<C-d>zz", { desc = "Half page down (centered)" })
+map("n", "<C-u>", "<C-u>zz", { desc = "Half page up (centered)" })
 
 -- Copy/paste using system register
-vim.keymap.set("x", "<leader>p", "\"_dP")
-vim.keymap.set("n", "<leader>y", "\"+y")
-vim.keymap.set("v", "<leader>y", "\"+y")
-vim.keymap.set("n", "<leader>Y", "\"+Y")
+map("x", "<leader>p", "\"_dP", { desc = "Paste over (keep register)" })
+map("n", "<leader>y", "\"+y", { desc = "Yank to system clipboard" })
+map("v", "<leader>y", "\"+y", { desc = "Yank to system clipboard" })
+map("n", "<leader>Y", "\"+Y", { desc = "Yank line to system clipboard" })
 
--- Deletion into the system register
-vim.keymap.set("n", "<leader>d", "\"_d")
-vim.keymap.set("v", "<leader>d", "\"_d")
-
+-- Delete without clobbering any register
+map("n", "<leader>d", "\"_d", { desc = "Delete (no register)" })
+map("v", "<leader>d", "\"_d", { desc = "Delete (no register)" })
 
 -- Setup a find and replace(substitute) with the word underneath the cursor
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+map("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Substitute word under cursor" })
 
 -- Make the current file executable
-vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+map("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true, desc = "chmod +x file" })
 
 -- Exit Terminal Mode
-vim.keymap.set("t", "<leader>q", [[<C-\><C-n>]])
+map("t", "<leader>q", [[<C-\><C-n>]], { desc = "Exit terminal mode" })
 
 vim.api.nvim_create_user_command('W', function() vim.cmd(":SudaWrite") end, {});

@@ -124,7 +124,7 @@ binds {
     Print { screenshot; }
     XF86Launch1 { screenshot; }
     Super+Shift+Q { quit; }
-    Mod+T hotkey-overlay-title="Open Terminal" { spawn "alacritty"; }
+    Mod+T hotkey-overlay-title="Open Terminal" { spawn "ghostty"; }
     Mod+D repeat=false { toggle-overview; }
     Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
     Mod+Shift+Slash { show-hotkey-overlay; }

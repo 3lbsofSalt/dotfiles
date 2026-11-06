@@ -6,6 +6,12 @@ output "LG Electronics LG HDR 4K 0x0004DE09" {
     position x=0 y=0
 }
 
+output "eDP-1" {
+    mode "1920x1080@144.001"
+    scale 1
+    position x=0 y=252
+}
+
 output "BOE 0x0B38 0x00000003" {
     mode "2560x1600@60.000"
     scale 1.5
@@ -28,5 +34,30 @@ output "Samsung Electric Company C27F398 HCNN901284" {
     mode "1920x1080@60.000"
     scale 1
     position x=6187 y=100
+}
+
+output "DP-1" {
+    mode "1920x1080@60.000"
+    scale 1
+    position x=3840 y=0
+}
+
+output "DP-8" {
+    mode "1920x1080@60.000"
+    scale 1
+    position x=7960 y=743
+}
+
+output "DP-6" {
+    mode "1920x1080@60.000"
+    scale 1
+    transform "270"
+    position x=8800 y=105
+}
+
+output "DP-7" {
+    mode "3440x1440@59.999"
+    scale 1
+    position x=9880 y=383
 }
 
